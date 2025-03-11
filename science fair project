@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Fair Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        canvas {
+            border: 2px solid black;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Science Fair Website</h1>
+        <p>Welcome to our science fair project website! This simple webpage is created using HTML, CSS, and JavaScript.</p>
+        <p>Click the button below to see an interactive feature.</p>
+        <button onclick="showMessage()">Click Me</button>
+        <p id="message"></p>
+
+        <h2>Fun Little Game</h2>
+        <p>Click the button below to start a simple game where you control a moving square.</p>
+        <button onclick="startGame()">Start Game</button>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        
+        <h2>How the Game Works</h2>
+        <p id="gameExplanation"></p>
+    </div>
+    
+    <script>
+        function showMessage() {
+            document.getElementById("message").innerText = "You just interacted with JavaScript!";
+        }
+        
+        function startGame() {
+            let canvas = document.getElementById("gameCanvas");
+            let ctx = canvas.getContext("2d");
+            let x = 50, y = 50;
+            document.addEventListener("keydown", moveSquare);
+            
+            function moveSquare(event) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (event.key === "ArrowUp") y -= 10;
+                if (event.key === "ArrowDown") y += 10;
+                if (event.key === "ArrowLeft") x -= 10;
+                if (event.key === "ArrowRight") x += 10;
+                ctx.fillStyle = "blue";
+                ctx.fillRect(x, y, 30, 30);
+            }
+            ctx.fillStyle = "blue";
+            ctx.fillRect(x, y, 30, 30);
+        }
+        
+        document.getElementById("gameExplanation").innerHTML = `
+            <strong>Game Explanation:</strong><br>
+            1. We create a &lt;canvas&gt; element to draw on.<br>
+            2. We get the canvas context using <code>getContext("2d")</code>.<br>
+            3. We start with a small blue square at position (50,50).<br>
+            4. We listen for key presses using <code>keydown</code> event.<br>
+            5. When an arrow key is pressed, we clear the canvas and move the square.<br>
+            6. The square moves up, down, left, or right based on the key pressed.<br>
+        `;
+    </script>
+</body>
+</html>
